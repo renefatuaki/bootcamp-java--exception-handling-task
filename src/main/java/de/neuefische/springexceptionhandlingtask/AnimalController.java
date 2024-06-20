@@ -1,6 +1,8 @@
 package de.neuefische.springexceptionhandlingtask;
 
 import de.neuefische.springexceptionhandlingtask.model.ErrorMessage;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
@@ -23,7 +25,7 @@ public class AnimalController {
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ErrorMessage handleIllegalArgumentException(IllegalArgumentException exception) {
-        return new ErrorMessage(exception.getMessage());
+    public ResponseEntity<ErrorMessage> handleIllegalArgumentException(IllegalArgumentException exception) {
+        return new ResponseEntity<>(new ErrorMessage(exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }
